@@ -9,8 +9,11 @@ import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import Post from "./Post";
 import { db } from "../firebase";
 import firebase from "firebase/compat/app";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
 
 function Feed() {
+  const user = useSelector(selectUser);
   const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
 
@@ -30,10 +33,10 @@ function Feed() {
   const sendPost = (e) => {
     e.preventDefault();
     db.collection("posts").add({
-      name: "Hadeeba",
-      description: "Test",
+      name: user.displayName,
+      description: user.email,
       message: input,
-      photoUrl: "",
+      photoUrl: user.photoUrl || "",
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setInput("");
@@ -43,7 +46,7 @@ function Feed() {
     <div className="feed">
       <div className="feed__inputContainer">
         <div className="feed__firstContainer">
-          <Avatar src="./1582704721394.jpeg" />
+          <Avatar src={user.photoUrl}>{user.email[0]}</Avatar>
           <div className="feed__input">
             <form>
               <input
