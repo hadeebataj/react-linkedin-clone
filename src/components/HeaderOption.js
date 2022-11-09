@@ -10,7 +10,12 @@ function HeaderOption({ avatar, Icon, title, onClick }) {
   return (
     <div onClick={onClick} className="headerOption">
       {Icon && <Icon className="headerOption__icon" />}
-      {avatar && <Avatar className="headerOption__avatar" />}
+      {avatar && (
+        <Avatar
+          className="headerOption__avatar"
+          src={user ? (user.photoUrl ? user.photoUrl : user.name[0]) : ""}
+        />
+      )}
       <span className="headerOption__title ">{title}</span>
     </div>
   );
