@@ -22,7 +22,9 @@ function Widgets() {
     <div className="widgets">
       <div className="widgets__header">
         <h2>Linkedin News</h2>
-        <InfoIcon />
+        <div className="widgets__icon">
+          <InfoIcon />
+        </div>
       </div>
       {newsArticle(
         "Meta lays off 11,000+ workers",
